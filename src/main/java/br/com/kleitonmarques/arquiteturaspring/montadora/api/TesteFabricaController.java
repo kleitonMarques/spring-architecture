@@ -1,0 +1,25 @@
+package br.com.kleitonmarques.arquiteturaspring.montadora.api;
+
+import br.com.kleitonmarques.arquiteturaspring.montadora.CarroStatus;
+import br.com.kleitonmarques.arquiteturaspring.montadora.Chave;
+import br.com.kleitonmarques.arquiteturaspring.montadora.HondaHRV;
+import br.com.kleitonmarques.arquiteturaspring.montadora.Motor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/carros")
+public class TesteFabricaController {
+
+    @Autowired
+    private Motor motor;
+
+    @PostMapping
+    public CarroStatus ligarCarro(@RequestBody Chave chave) {
+        var carro = new HondaHRV(motor);
+        return carro.darIgnicao(chave);
+    }
+}
